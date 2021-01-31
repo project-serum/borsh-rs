@@ -23,6 +23,7 @@ path = "src/generate_schema_schema.rs"
 [dependencies]
 borsh-derive = { path = "../borsh-derive", version = "0.8.0" }
 hashbrown = "0.9.1"
+solana-program = "1.5.0"
 
 [features]
 default = ["std"]
