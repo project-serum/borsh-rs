@@ -1,6 +1,6 @@
 use core::convert::TryFrom;
+use core::hash::BuildHasher;
 use core::mem::size_of;
-use std::hash::BuildHasher;
 
 use crate::maybestd::{
     borrow::{Cow, ToOwned},

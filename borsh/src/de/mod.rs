@@ -1,8 +1,8 @@
 use core::{
     convert::TryInto,
+    hash::{BuildHasher, Hash},
     mem::{forget, size_of},
 };
-use std::hash::{BuildHasher, Hash};
 
 use crate::maybestd::{
     borrow::{Borrow, Cow, ToOwned},
