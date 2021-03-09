@@ -2,7 +2,7 @@ use core::{
     convert::TryInto,
     mem::{forget, size_of},
 };
-use std::hash::BuildHasher;
+use std::hash::{BuildHasher, Hash};
 
 use crate::maybestd::{
     borrow::{Borrow, Cow, ToOwned},
@@ -325,7 +325,7 @@ where
 
 impl<T, H> BorshDeserialize for HashSet<T, H>
 where
-    T: BorshDeserialize + Eq + std::hash::Hash,
+    T: BorshDeserialize + Eq + Hash,
     H: BuildHasher + Default,
 {
     #[inline]
@@ -337,7 +337,7 @@ where
 
 impl<K, V, H> BorshDeserialize for HashMap<K, V, H>
 where
-    K: BorshDeserialize + Eq + std::hash::Hash,
+    K: BorshDeserialize + Eq + Hash,
     V: BorshDeserialize,
     H: BuildHasher + Default,
 {
