@@ -1,17 +1,18 @@
+use crate::maybestd::collections::HashMap;
+use crate::maybestd::io;
+use crate::maybestd::string::ToString;
 use crate::schema::{Declaration, Definition};
 use crate::{BorshDeserialize, BorshSchema, BorshSerialize};
 use solana_program::pubkey::Pubkey;
-use std::collections::HashMap;
-use std::io::Write;
 
 impl BorshSerialize for Pubkey {
-    fn serialize<W: Write>(&self, writer: &mut W) -> std::io::Result<()> {
+    fn serialize<W: io::Write>(&self, writer: &mut W) -> io::Result<()> {
         self.to_bytes().serialize(writer)
     }
 }
 
 impl BorshDeserialize for Pubkey {
-    fn deserialize(buf: &mut &[u8]) -> std::io::Result<Self> {
+    fn deserialize(buf: &mut &[u8]) -> io::Result<Self> {
         let arr = BorshDeserialize::deserialize(buf)?;
         Ok(Pubkey::new_from_array(arr))
     }
