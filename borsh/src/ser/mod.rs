@@ -1,5 +1,6 @@
 use core::convert::TryFrom;
 use core::mem::size_of;
+use std::hash::BuildHasher;
 
 use crate::maybestd::{
     borrow::{Cow, ToOwned},
@@ -253,10 +254,11 @@ where
     }
 }
 
-impl<K, V> BorshSerialize for HashMap<K, V>
+impl<K, V, H> BorshSerialize for HashMap<K, V, H>
 where
     K: BorshSerialize + PartialOrd,
     V: BorshSerialize,
+    H: BuildHasher,
 {
     #[inline]
     fn serialize<W: Write>(&self, writer: &mut W) -> Result<()> {
@@ -273,9 +275,10 @@ where
     }
 }
 
-impl<T> BorshSerialize for HashSet<T>
+impl<T, H> BorshSerialize for HashSet<T, H>
 where
     T: BorshSerialize + PartialOrd,
+    H: BuildHasher,
 {
     #[inline]
     fn serialize<W: Write>(&self, writer: &mut W) -> Result<()> {
